@@ -116,7 +116,9 @@
         <user_parameters>
 	<user_parameter name="CONFIG.USE_INCLK_SWITCHOVER" value="true"/>
         <user_parameter name="CONFIG.SECONDARY_IN_FREQ" value="200"/>
-        <user_parameter name="CONFIG.SECONDARY_SOURCE" value="Differential_clock_capable_pin"/> 
+        <user_parameter name="CONFIG.SECONDARY_SOURCE" value="Differential_clock_capable_pin"/><user_parameter
+        	name="CONFIG.RESET_TYPE" value="ACTIVE_LOW">
+</user_parameter>
         </user_parameters>
     </ip>
   </ip_preset>

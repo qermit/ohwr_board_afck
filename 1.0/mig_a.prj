@@ -10,9 +10,9 @@
     <XADC_En>Enabled</XADC_En>
     <TargetFPGA>xc7k325t-ffg900/-2</TargetFPGA>
     <Version>2.4</Version>
-    <SystemClock>Differential</SystemClock>
-    <ReferenceClock>Use System Clock</ReferenceClock>
-    <SysResetPolarity>ACTIVE HIGH</SysResetPolarity>
+    <SystemClock>No Buffer</SystemClock>
+    <ReferenceClock>No Buffer</ReferenceClock>
+    <SysResetPolarity>ACTIVE LOW</SysResetPolarity>
     <BankSelectionFlag>FALSE</BankSelectionFlag>
     <InternalVref>0</InternalVref>
     <dci_hr_inouts_inputs>50 Ohms</dci_hr_inouts_inputs>

@@ -44,7 +44,7 @@
 					type="xilinx.com:interface:diff_clock_rtl:1.0" of_component="sys_diff_clock"
 					preset_proc="sys_diff_clock_preset">
 					<parameters>
-						<parameter name="frequency" value="200000000" />
+						<parameter name="frequency" value="125000000" />
 					</parameters>
 					<preferred_ips>
 						<preferred_ip vendor="xilinx.com" library="ip" name="clk_wiz"
@@ -253,24 +253,75 @@
 						</port_map>
 					</port_maps>
 				</interface>
-				<interface mode="slave" name="reset"
-					type="xilinx.com:signal:reset_rtl:1.0" of_component="reset">
+				<interface mode="slave" name="sys_rst"
+					type="xilinx.com:signal:reset_rtl:1.0" of_component="sys_rst">
 					<parameters>
-						<parameter name="rst_polarity" value="1" />
+						<parameter name="rst_polarity" value="0" />
 					</parameters>
 					<preferred_ips>
 						<preferred_ip vendor="xilinx.com" library="ip"
 							name="proc_sys_reset" order="0" />
 					</preferred_ips>
 					<port_maps>
-						<port_map logical_port="RESET" physical_port="reset" dir="in">
+						<port_map logical_port="RST" physical_port="sys_rst" dir="in">
 							<pin_maps>
 								<pin_map port_index="0" component_pin="CPU_RESET" />
 							</pin_maps>
 						</port_map>
 					</port_maps>
 				</interface>
-				<!--
+
+
+				<interface mode="slave" name="mgt_fp2_clk1"
+					type="xilinx.com:interface:diff_clock_rtl:1.0" of_component="mgt_fp2_clk1"
+					preset_proc="pcie_refclk_preset">
+					<parameters>
+						<parameter name="frequency" value="125000000" />
+					</parameters>
+					<preferred_ips>
+						<preferred_ip vendor="xilinx.com" library="ip"
+							name="util_ds_buf" order="0" />
+					</preferred_ips>
+					<port_maps>
+						<port_map logical_port="CLK_P" physical_port="pcie2_mgt_clk1p"
+							dir="in">
+							<pin_maps>
+								<pin_map port_index="0" component_pin="pcie2_mgt_clk1p" />
+							</pin_maps>
+						</port_map>
+						<port_map logical_port="CLK_N" physical_port="pcie2_mgt_clk1n"
+							dir="in">
+							<pin_maps>
+								<pin_map port_index="0" component_pin="pcie2_mgt_clk1n" />
+							</pin_maps>
+						</port_map>
+					</port_maps>
+				</interface> 
+				<interface mode="slave" name="mgt_fp2_clk0"
+					type="xilinx.com:interface:diff_clock_rtl:1.0" of_component="mgt_fp2_clk0"
+					preset_proc="pcie_refclk_preset">
+					<parameters>
+						<parameter name="frequency" value="125000000" />
+					</parameters>
+					<preferred_ips>
+						<preferred_ip vendor="xilinx.com" library="ip"
+							name="util_ds_buf" order="0" />
+					</preferred_ips>
+					<port_maps>
+						<port_map logical_port="CLK_P" physical_port="pcie2_mgt_clk0p"
+							dir="in">
+							<pin_maps>
+								<pin_map port_index="0" component_pin="pcie2_mgt_clk0p" />
+							</pin_maps>
+						</port_map>
+						<port_map logical_port="CLK_N" physical_port="pcie2_mgt_clk0n"
+							dir="in">
+							<pin_maps>
+								<pin_map port_index="0" component_pin="pcie2_mgt_clk0n" />
+							</pin_maps>
+						</port_map>
+					</port_maps>
+				</interface> 				
 				<interface mode="slave" name="pcie_refclk"
 					type="xilinx.com:interface:diff_clock_rtl:1.0" of_component="pcie_refclk"
 					preset_proc="pcie_refclk_preset">
@@ -296,7 +347,7 @@
 						</port_map>
 					</port_maps>
 				</interface> 
-				-->
+				
 				<!--
 				<interface mode="master" name="pci_express_x4"
 					type="xilinx.com:interface:pcie_7x_mgt_rtl:1.0" of_component="pci_express"
@@ -362,14 +413,14 @@
 		<component name="sys_diff_clock" display_name="System differential clock"
 			type="chip" sub_type="system_clock" major_group="Clock Sources"
 			part_name="SiT9102AI" vendor="Si Time" spec_url="www.sitime.com">
-			<description>2.5V LVDS differential 200 MHz oscillator used as system
-				differential clock on the board
+			<description>2.5V LVDS differential 125MHz oscillator used as system
+				differential clock on the board (WhiteRabbit)
 			</description>
 			<parameters>
-				<parameter name="frequency" value="200000000" />
+				<parameter name="frequency" value="125000000" />
 			</parameters>
 		</component>
-		<!--
+		
 		<component name="pcie_refclk" display_name="PCIe MGT reference Clock"
 			type="chip" sub_type="mgt_clock" major_group="Clock Sources"
 			part_name="pcie_8lane_edge" vendor="Clock" spec_url="">
@@ -379,7 +430,32 @@
 				<parameter name="frequency" value="100000000" />
 			</parameters>
 		</component>
-		-->
+		<component name="mgt_fp2_clk0" display_name="FatPipe2 reference Clock 0"
+			type="chip" sub_type="mgt_clock" major_group="Clock Sources"
+			part_name="pcie_8lane_edge" vendor="Clock" spec_url="">
+			<description>Clock input FP2 CLK0</description>
+			<parameters>
+				<parameter name="frequency" value="125000000" />
+			</parameters>
+		</component>
+				<component name="mgt_fp2_clk1" display_name="FatPipe2 reference Clock 1"
+			type="chip" sub_type="mgt_clock" major_group="Clock Sources"
+			part_name="pcie_8lane_edge" vendor="Clock" spec_url="">
+			<description>Clock input FP2 CLK1</description>
+			<parameters>
+				<parameter name="frequency" value="125000000" />
+			</parameters>
+		</component>
+				<component name="pcie_refclk" display_name="PCIe MGT reference Clock"
+			type="chip" sub_type="mgt_clock" major_group="Clock Sources"
+			part_name="pcie_8lane_edge" vendor="Clock" spec_url="">
+			<description>Clock input from PCI Express edge connector (FP1)</description>
+			<parameters>
+				<parameter name="frequency" value="100000000" />
+			</parameters>
+		</component>
+		
+		
 		<component name="spi_flash" display_name="SPI flash" type="chip"
 			sub_type="memory_flash_qspi" major_group="External Memory" part_name="N25Q128A13BSF40F"
 			vendor="Micron" spec_url="www.micron.com/memory">
@@ -420,7 +496,7 @@
 			sub_type="mux" major_group="Miscellaneous">
 			<description>I2C</description>
 		</component>
-		<component name="reset" display_name="FPGA Reset" type="chip"
+		<component name="sys_rst" display_name="FPGA Reset" type="chip"
 			sub_type="system_reset" major_group="Reset" part_name="TL3301EP100QG"
 			vendor="ESwitch">
 			<description>CPU Reset Push Button, Active High</description>
@@ -467,10 +543,10 @@
 				typical_delay="5" c1_st_index="90" c1_end_index="91" c2_st_index="0"
 				c2_end_index="1" />
 		</connection>
-		<connection name="part0_reset" component1="part0"
-			component2="reset">
-			<connection_map name="part0_reset_1" typical_delay="5"
-				c1_st_index="88" c1_end_index="88" component2="reset" c2_st_index="0"
+		<connection name="part0_sys_rst" component1="part0"
+			component2="sys_rst">
+			<connection_map name="part0_sys_rst_1" typical_delay="5"
+				c1_st_index="88" c1_end_index="88" component2="sys_rst" c2_st_index="0"
 				c2_end_index="0" />
 		</connection>
 		<connection name="part0_sys_diff_clock" component1="part0"
@@ -514,12 +590,25 @@
 <!-- 			<connection_map name="part0_pcie_express_1" -->
 <!-- 				c1_st_index="152" c1_end_index="167" c2_st_index="0" c2_end_index="15"></connection_map> -->
 <!-- 		</connection> -->
-<!-- 		<connection name="part0_pcie_refclk" component1="part0" -->
-<!-- 			component2="pcie_refclk"> -->
-<!-- 			<connection_map name="part0_pcie_refclk1" -->
-<!-- 				typical_delay="5" c1_st_index="150" c1_end_index="151" c2_st_index="0" -->
-<!-- 				c2_end_index="1" /> -->
-<!-- 		</connection> -->
+ 		<connection name="part0_fp2_clk1" component1="part0"
+ 			component2="mgt_fp2_clk1">
+ 			<connection_map name="part0_fp2_clk1"
+ 				typical_delay="5" c1_st_index="150" c1_end_index="151" c2_st_index="0"
+ 				c2_end_index="1" />
+ 		</connection>
+ 		<connection name="part0_fp2_clk0" component1="part0"
+ 			component2="mgt_fp2_clk0">
+ 			<connection_map name="part0_fp2_clk0"
+ 				typical_delay="5" c1_st_index="150" c1_end_index="151" c2_st_index="0"
+ 				c2_end_index="1" />
+ 		</connection>
+ 		<connection name="part0_pcie_refclk" component1="part0"
+ 			component2="pcie_refclk">
+ 			<connection_map name="part0_pcie_refclk1"
+ 				typical_delay="5" c1_st_index="150" c1_end_index="151" c2_st_index="0"
+ 				c2_end_index="1" />
+ 		</connection>		
+		
 	</connections>
 	<ip_associated_rules>
 		<ip_associated_rule name="default">
