@@ -276,7 +276,7 @@
 					type="xilinx.com:interface:diff_clock_rtl:1.0" of_component="mgt_fp2_clk1"
 					preset_proc="pcie_refclk_preset">
 					<parameters>
-						<parameter name="frequency" value="125000000" />
+						<parameter name="frequency" value="100000000" />
 					</parameters>
 					<preferred_ips>
 						<preferred_ip vendor="xilinx.com" library="ip"
@@ -326,7 +326,7 @@
 					type="xilinx.com:interface:diff_clock_rtl:1.0" of_component="pcie_refclk"
 					preset_proc="pcie_refclk_preset">
 					<parameters>
-						<parameter name="frequency" value="100000000" />
+						<parameter name="frequency" value="125000000" />
 					</parameters>
 					<preferred_ips>
 						<preferred_ip vendor="xilinx.com" library="ip"
@@ -427,7 +427,7 @@
 			<description>Clock input from PCI Express edge connector
 			</description>
 			<parameters>
-				<parameter name="frequency" value="100000000" />
+				<parameter name="frequency" value="125000000" />
 			</parameters>
 		</component>
 		<component name="mgt_fp2_clk0" display_name="FatPipe2 reference Clock 0"
@@ -443,7 +443,7 @@
 			part_name="pcie_8lane_edge" vendor="Clock" spec_url="">
 			<description>Clock input FP2 CLK1</description>
 			<parameters>
-				<parameter name="frequency" value="125000000" />
+				<parameter name="frequency" value="100000000" />
 			</parameters>
 		</component>
 				<component name="pcie_refclk" display_name="PCIe MGT reference Clock"
@@ -451,7 +451,7 @@
 			part_name="pcie_8lane_edge" vendor="Clock" spec_url="">
 			<description>Clock input from PCI Express edge connector (FP1)</description>
 			<parameters>
-				<parameter name="frequency" value="100000000" />
+				<parameter name="frequency" value="125000000" />
 			</parameters>
 		</component>
 		
